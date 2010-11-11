@@ -10,7 +10,7 @@ begin
     gem.email = "nicholas@madmimi.com"
     gem.homepage = "http://github.com/madmimi/madmimi-gem"
     gem.authors = ["Nicholas Young", "Marc Heiligers"]
-    gem.add_dependency "crack", "0.1.7"
+    gem.add_dependency "httparty", "0.6.1"
     gem.add_development_dependency "jeweler", "1.4.0"
     gem.add_development_dependency "fakeweb", "1.2.8"
     gem.add_development_dependency "shoulda", "2.10.3"
@@ -24,14 +24,20 @@ end
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/unit/test_*.rb'
+  test.verbose = true
+end
+
+Rake::TestTask.new('test:remote') do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/remote/test_*.rb'
   test.verbose = true
 end
 
 begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |test|
-    test.libs << 'test'
+    test.libs << 'lib' << 'test'
     test.pattern = 'test/**/test_*.rb'
     test.verbose = true
   end
@@ -42,6 +48,7 @@ rescue LoadError
 end
 
 task :test => :check_dependencies
+task :remote => :check_dependencies
 
 task :default => :test
 

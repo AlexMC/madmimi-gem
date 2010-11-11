@@ -1,0 +1,18 @@
+<mailing>
+  <sent>14481</sent>
+  <views>5562</views>
+  <untraced>8501</untraced>
+  <clicked>1263</clicked>
+  <links>
+    <link url="http://example.com" id="200908029">
+      <clicks>0</clicks>
+    </link>
+    <link url="http://anotherexample.com" id="200908024">
+      <clicks>62</clicks>
+    </link>
+  </links>
+
+  <forwarded>1</forwarded>
+  <bounced>418</bounced>
+  <unsubscribed>86</unsubscribed>
+</mailing>
