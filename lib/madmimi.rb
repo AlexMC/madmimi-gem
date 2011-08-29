@@ -44,6 +44,8 @@ class MadMimi
   MEMBERSHIPS_PATH = '/audience_members/%email%/lists.xml'
   SUPPRESSED_SINCE_PATH = '/audience_members/suppressed_since/%timestamp%.txt'
   SUPPRESS_USER_PATH = ' /audience_members/%email%/suppress_email'
+  GET_AUDIENCE_MEMBERS_PATH = '/audience_members.xml'
+  GET_AUDIENCE_LIST_MEMBERS_PATH = '/audience_lists/%list%/members.xml'
   SEARCH_PATH = '/audience_members/search.xml'
   
   PROMOTIONS_PATH = '/promotions.xml'
@@ -106,6 +108,16 @@ class MadMimi
 
   def remove_from_list(email, list_name)
     do_request("#{NEW_LISTS_PATH}/#{URI.escape(list_name)}/remove", :post, :email => email)
+  end
+
+  def members
+    request = do_request(GET_AUDIENCE_MEMBERS_PATH, :get)
+    Crack::XML.parse(request)
+  end
+
+  def list_members(list_name)
+    request = do_request(GET_AUDIENCE_LIST_MEMBERS_PATH.gsub('%list%', list_name), :get)
+    Crack::XML.parse(request)
   end
 
   def suppressed_since(timestamp)
