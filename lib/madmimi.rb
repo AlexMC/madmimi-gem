@@ -77,7 +77,11 @@ class MadMimi
   # Audience and lists
   def lists
     request = do_request(AUDIENCE_LISTS_PATH, :get)
-    Crack::XML.parse(request)
+    results = Crack::XML.parse(request)
+    if results['lists'] && results['lists']['list'].is_a?(Hash)
+      results['lists']['list'] = [ results['lists']['list'] ]
+    end
+    results
   end
 
   def memberships(email)
