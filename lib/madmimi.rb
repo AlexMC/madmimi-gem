@@ -107,6 +107,10 @@ class MadMimi
   def remove_from_list(email, list_name)
     do_request("#{NEW_LISTS_PATH}/#{URI.escape(list_name)}/remove", :post, :email => email)
   end
+  
+  def update_email(existing_email, new_email)
+    do_request("#{AUDIENCE_MEMBERS_PATH}/update_email", :post, :email => existing_email, :new_email => new_email)
+  end
 
   def suppressed_since(timestamp)
     do_request(SUPPRESSED_SINCE_PATH.gsub('%timestamp%', timestamp), :get)
@@ -120,7 +124,7 @@ class MadMimi
     request = do_request(SEARCH_PATH, :get, :raw => raw, :query => query_string)
     Crack::XML.parse(request)
   end
-
+  
   # Not the most elegant, but it works for now. :)
   def add_users_to_list(list_name, arr)
     arr.each do |a|
