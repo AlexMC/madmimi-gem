@@ -14,6 +14,7 @@ begin
     gem.add_development_dependency "jeweler", ">1.4"
     gem.add_development_dependency "fakeweb", ">1.2"
     gem.add_development_dependency "shoulda", ">2.10"
+    gem.add_development_dependency "rdoc"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -45,7 +46,7 @@ task :test => :check_dependencies
 
 task :default => :test
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
