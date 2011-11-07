@@ -108,6 +108,10 @@ class MadMimi
     do_request("#{NEW_LISTS_PATH}/#{URI.escape(list_name)}/remove", :post, :email => email)
   end
   
+  def remove_from_all_lists(email)
+    do_request("#{NEW_LISTS_PATH}/remove_all", :post, :email => email)
+  end
+  
   def update_email(existing_email, new_email)
     do_request("#{AUDIENCE_MEMBERS_PATH}/update_email", :post, :email => existing_email, :new_email => new_email)
   end
